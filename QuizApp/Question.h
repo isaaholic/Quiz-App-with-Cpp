@@ -3,13 +3,11 @@
 class Question
 {
 public:
-	static int number;
+	int number;
 	std::string question;
+	Answers anw;
 
-	Question(std::string ques):question(ques)
-	{
-		number++;
-	}
+	Question() = default;
+
+	Question(int number, std::string ques, Answers anw) :number(number), question(ques), anw(anw){}
 };
-
-int Question::number = 0;

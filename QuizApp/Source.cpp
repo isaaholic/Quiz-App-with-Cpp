@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <conio.h>
+#include <string>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -43,7 +44,7 @@ class Start
 		switch (choice)
 		{
 		case 1:
-			// CreateQuiz();
+			CreateQuiz();
 			break;
 		case 2:
 			// StartQuiz();
@@ -52,6 +53,39 @@ class Start
 		default:
 			break;
 		}
+	}
+
+	static void CreateQuiz()
+	{
+		system("cls||clear");
+		Quiz quiz;
+		std::cout << "Enter Quiz name: ";
+		std::cin >> quiz.fileName;
+		std::cin.ignore();
+		int i = 1;
+		while (1)
+		{
+			std::string que;
+			std::cout << "Question "<<i<<": ";
+			getline(std::cin, que);
+			std::cout << que << std::endl;
+			std::string varA, varB, varC, varD;
+			std::cout << "A)  ";
+			getline(std::cin, varA);
+			std::cout << "B)  ";
+			getline(std::cin, varB);
+			std::cout << "C)  ";
+			getline(std::cin, varC);
+			std::cout << "D)  ";
+			getline(std::cin, varD);
+			Answers a(varA,varB,varC,varD);
+			Question q(i,que,a);
+			quiz.addQuestion(q);
+			i++;
+			break;
+		}
+		quiz.reload();
+		quiz.writeJson();
 	}
 
 public:
@@ -73,30 +107,10 @@ public:
 	}
 };
 
-std::string json_read(json j)
-{
-	const std::string filename = "ex2.json";
-	std::ifstream reader(filename);
-	reader >> j;
-	reader.close();
-	return j.dump(2);
-}
-
-json json_write(std::string name)
-{
-	json j;
-	j.push_back(name);
-
-	std::ofstream writer;
-	writer.open("ex2.json");
-	writer << j.dump(1);
-	return j;
-}
-
 
 int main()
 {
-	/*Start::StartUp();*/
+	Start::StartUp();
 	//json j;
 	//std::string name;
 	//std::string name2;
@@ -113,15 +127,20 @@ int main()
 	//reader.close();
 	//std::cout << Jread[0][0];
 
-	Question q1("sss");
-	Question q2("sad");
-	Quiz quiz("quiz1", "Isa");
-	quiz.addQuestion(q1);
-	quiz.addQuestion(q2);
+	//Answers a1("an", "bn", "cn", "dn");
+	//Question q1("sss");
+	//q1.anw = a1;
+	//Answers a2("aw", "bw", "cw", "dw");
+	//Question q2("sad");
+	//q2.anw = a2;
+	//Quiz quiz("quiz1", "Isa");
+	//quiz.addQuestion(q1);
+	//quiz.addQuestion(q2);
 
-	quiz.reload();
+	//quiz.reload();
 
-	quiz.writeJson();
+	//quiz.writeJson();
+
 
 	//json j1;
 	//json j2;
@@ -141,6 +160,9 @@ int main()
 	//reader.close();
 	//std::cout << quizFile;
 
+	//std::string name;
+	//getline(std::cin, name);
+	//std::cout << name;
 
 	return EXIT_SUCCESS;
 }
