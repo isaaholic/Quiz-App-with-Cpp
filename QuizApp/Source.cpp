@@ -47,7 +47,7 @@ class Start
 			CreateQuiz();
 			break;
 		case 2:
-			// StartQuiz();
+			StartQuiz();
 		case 3:
 			// LeaderBoard();
 		default:
@@ -131,19 +131,6 @@ class Start
 		quiz.reload();
 		quiz.writeJson();
 
-		std::fstream quizFilesR;
-		quizFilesR.open("quizNames.txt", std::ios::in);//write
-		std::cout << "`````````````````````````" << std::endl;
-		std::string line;
-		while (getline(quizFilesR, line))
-		{
-			if (line.find("quiz") != std::string::npos)
-			{
-				std::cout << line << std::endl;
-			}
-		}
-		std::cout << "`````````````````````````" << std::endl;
-
 		//system("cls||clear");
 
 		//int i = 1;
@@ -187,7 +174,55 @@ class Start
 
 	static void StartQuiz()
 	{
-		
+		system("cls||clear");
+		std::string userName;
+		std::cout << "Enter Your Name: ";
+		std::cin >> userName;
+		std::fstream quizFilesR;
+		quizFilesR.open("quiznames.txt", std::ios::in);//write
+		system("cls||clear");
+		std::cout << "`````````````````````````" << std::endl;
+		std::string line;
+		std::vector<std::string> quizNames;
+		while (getline(quizFilesR, line))
+		{
+			std::cout << line << std::endl;
+			quizNames.push_back(line);
+		}
+		std::cout << "`````````````````````````" << std::endl;
+		quizFilesR.close();
+		std::cout << "Select one: ";
+		int choice;
+		std::cin >> choice;
+		system("cls||clear");
+		std::fstream quizFileR;
+		try
+		{
+			quizFileR.open(quizNames[choice - 1] + ".json", std::ios::in);//write
+			if (!quizFileR)
+			{
+				throw "file doesn't exist";
+			}
+		}
+		catch (const char* msg)
+		{
+			std::cout << msg << std::endl;
+			return;
+		}
+		json quizFile;
+		quizFileR >> quizFile;
+		quizFileR.close();
+		for (size_t i = 0; i < quizFile.size(); i++)
+		{
+			std::cout << "````````````\n";
+			std::cout << quizFile[i][0] << ". ";
+			std::cout << quizFile[i][1] << std::endl;
+			for (size_t j = 0; j < quizFile[i][2].size(); j++)
+			{
+				std::cout << char(65 + j)<<") " << quizFile[i][2][j] << std::endl;
+			}
+			std::cout << "````````````\n";
+		}
 	}
 
 public:
