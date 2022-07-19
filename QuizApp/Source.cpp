@@ -3,6 +3,7 @@
 #include <fstream>
 #include <conio.h>
 #include <string>
+#include <direct.h>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -72,7 +73,8 @@ class Start
 		std::cin >> quiz.fileName;
 
 		std::fstream quizFilesW;
-		quizFilesW.open("quiznames.txt", std::ios::app);//write
+		_mkdir("./txtFiles");
+		quizFilesW.open("./txtFiles/quiznames.txt", std::ios::app);//write
 		std::cin.ignore();
 		quizFilesW << quiz.fileName << '\n';
 		quizFilesW.close();
@@ -187,7 +189,7 @@ class Start
 		std::cout << "Enter Your Name: ";
 		std::cin >> userName;
 		std::fstream quizFilesR;
-		quizFilesR.open("quiznames.txt", std::ios::in);//write
+		quizFilesR.open("./txtFiles/quiznames.txt", std::ios::in);//write
 		system("cls||clear");
 		std::cout << "`````````````````````````" << std::endl;
 		std::string line;
@@ -255,6 +257,6 @@ public:
 int main()
 {
 	Start::StartUp();
-
+	
 	return EXIT_SUCCESS;
 }
