@@ -27,6 +27,9 @@ class Start
 		case 1:
 			AdminPage();
 			break;
+		case 2:
+			// GuestPage();
+			break;
 		default:
 			break;
 		}
@@ -49,10 +52,15 @@ class Start
 		case 2:
 			StartQuiz();
 		case 3:
-			// LeaderBoard();
+			LeaderBoard();
 		default:
 			break;
 		}
+	}
+
+	static void LeaderBoard()
+	{
+		// codespace
 	}
 
 
@@ -219,7 +227,7 @@ class Start
 			std::cout << quizFile[i][1] << std::endl;
 			for (size_t j = 0; j < quizFile[i][2].size(); j++)
 			{
-				std::cout << char(65 + j)<<") " << quizFile[i][2][j] << std::endl;
+				std::cout << char(65 + j) << ") " << quizFile[i][2][j] << std::endl;
 			}
 			std::cout << "````````````\n";
 		}
@@ -247,68 +255,6 @@ public:
 int main()
 {
 	Start::StartUp();
-	//json j;
-	//std::string name;
-	//std::string name2;
-	//std::cin >> name;
-	//std::cin >> name2;
-	//j.push_back(name);
-	//j.push_back(name2);
-	//std::ofstream writer;
-	//writer.open("ex2.json");
-	//writer << j.dump(2);
-	//std::ifstream reader("ex2.json");
-	//json Jread;
-	//reader >> Jread;
-	//reader.close();
-	//std::cout << Jread[0][0];
-
-	//Answers a1("an", "bn", "cn", "dn");
-	//Question q1("sss");
-	//q1.anw = a1;
-	//Answers a2("aw", "bw", "cw", "dw");
-	//Question q2("sad");
-	//q2.anw = a2;
-	//Quiz quiz("quiz1", "Isa");
-	//quiz.addQuestion(q1);
-	//quiz.addQuestion(q2);
-
-	//quiz.reload();
-
-	//quiz.writeJson();
-
-
-	//json j1;
-	//json j2;
-	//j1.push_back(1);
-	//j2.push_back(2);
-	//j1.push_back("sss");
-	//j2.push_back("aaa");
-	//json quizFile;
-	//quizFile[0] = j1;
-	//quizFile[1] = j2;
-	//std::ofstream writer;
-	//writer.open("que1.json");
-	//writer << quizFile.dump(2);
-	//writer.close();
-	//std::ifstream reader("que1.json");
-	//reader >> quizFile;
-	//reader.close();
-	//std::cout << quizFile;
-
-	//std::string name;
-	//getline(std::cin, name);
-	//std::cout << name;
-
-	//std::fstream quizFiles;
-	//quizFiles.open("quizNames.txt", std::ios::in);//write
-	//std::cout << "`````````````````````````" << std::endl;
-	//std::string line;
-	//while (getline(quizFiles, line))
-	//{
-	//	std::cout << line << std::endl;
-	//}
-	//std::cout << "`````````````````````````" << std::endl;
 
 	return EXIT_SUCCESS;
 }
