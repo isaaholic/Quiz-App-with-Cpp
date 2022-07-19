@@ -26,7 +26,7 @@ public:
 			json j;
 			j.push_back(questions[i].number);
 			j.push_back(questions[i].question);
-			j.push_back(questions[i].anw.answers);
+			j.push_back(questions[i].answers.answers);
 			quizFile[i] = j;
 		}
 		std::ofstream writer;

@@ -55,37 +55,139 @@ class Start
 		}
 	}
 
+
 	static void CreateQuiz()
 	{
 		system("cls||clear");
 		Quiz quiz;
-		std::cout << "Enter Quiz name: ";
+		std::cout << "Enter quiz name: ";
 		std::cin >> quiz.fileName;
+
+		std::fstream quizFilesW;
+		quizFilesW.open("quiznames.txt", std::ios::app);//write
 		std::cin.ignore();
+		quizFilesW << quiz.fileName << '\n';
+		quizFilesW.close();
+
+		std::vector<Question*> quizQuestions;
+		quizQuestions.push_back(new Question);
+		std::vector<std::string> quizAnswers;
+		std::string question;
+		int choice;
 		int i = 1;
-		while (1)
+		int ka = 1;
+		std::string answer;
+		bool isRunning = true;
+
+		std::cout << "Question " << i << ": ";
+		getline(std::cin, question);
+
+		while (isRunning)
 		{
-			std::string que;
-			std::cout << "Question "<<i<<": ";
-			getline(std::cin, que);
-			std::cout << que << std::endl;
-			std::string varA, varB, varC, varD;
-			std::cout << "A)  ";
-			getline(std::cin, varA);
-			std::cout << "B)  ";
-			getline(std::cin, varB);
-			std::cout << "C)  ";
-			getline(std::cin, varC);
-			std::cout << "D)  ";
-			getline(std::cin, varD);
-			Answers a(varA,varB,varC,varD);
-			Question q(i,que,a);
-			quiz.addQuestion(q);
-			i++;
-			break;
+			std::cout << "1: new" << "\n2: back" << "\n3: save\n";
+			std::cout << "Choice: ";
+			std::cin >> choice;
+			std::cin.ignore();
+			switch (choice)
+			{
+			case 1:
+				if (!(question.empty()))
+				{
+					std::cout << "Answer " << ka++ << ": ";
+					getline(std::cin, answer);
+					quizAnswers.push_back(answer);
+					break;
+				}
+				std::cout << "Question" << i << ": ";
+				getline(std::cin, question);
+				break;
+			case 2:
+			{
+
+				isRunning = false;
+				break;
+			}
+			case 3:
+			{
+				ka = 1;
+				Question* que = new Question;
+				que->number = i;
+				que->question = question;
+				que->answers.addAnswers(quizAnswers);
+				quizAnswers.clear();
+				//quizQuestions.push_back(que);
+				quiz.addQuestion(*que);
+				i++;
+				question.clear();
+				/*std::cout << "Question " << i << ": ";
+				getline(std::cin, question);*/
+				break;
+			}
+			default:
+				break;
+			}
 		}
+
 		quiz.reload();
 		quiz.writeJson();
+
+		std::fstream quizFilesR;
+		quizFilesR.open("quizNames.txt", std::ios::in);//write
+		std::cout << "`````````````````````````" << std::endl;
+		std::string line;
+		while (getline(quizFilesR, line))
+		{
+			if (line.find("quiz") != std::string::npos)
+			{
+				std::cout << line << std::endl;
+			}
+		}
+		std::cout << "`````````````````````````" << std::endl;
+
+		//system("cls||clear");
+
+		//int i = 1;
+		//while (1)
+		//{
+		//	std::string que;
+		//	std::cout << "Question " << i << ": ";
+		//	getline(std::cin, que);
+		//	std::cout << que << std::endl;
+		//	std::string varA, varB, varC, varD;
+		//	std::cout << "A)  ";
+		//	getline(std::cin, varA);
+		//	std::cout << "B)  ";
+		//	getline(std::cin, varB);
+		//	std::cout << "C)  ";
+		//	getline(std::cin, varC);
+		//	std::cout << "D)  ";
+		//	getline(std::cin, varD);
+		//	Answers a(varA, varB, varC, varD);
+		//	Question q(i, que, a);
+		//	quiz.addQuestion(q);
+		//	i++;
+		//	break;
+		//	quizFilesW.close();
+		//}
+		//quiz.reload();
+		//quiz.writeJson();
+		//std::fstream quizFilesR;
+		//quizFilesR.open("quizNames.txt", std::ios::in);//write
+		//std::cout << "`````````````````````````" << std::endl;
+		//std::string line;
+		//while (getline(quizFilesR, line))
+		//{
+		//	if (line.find("quiz")!=std::string:: npos)
+		//	{
+		//		std::cout << line << std::endl;
+		//	}
+		//}
+		//std::cout << "`````````````````````````" << std::endl;
+	}
+
+	static void StartQuiz()
+	{
+		
 	}
 
 public:
@@ -98,7 +200,6 @@ public:
 		// Start Quiz
 		// Leader Board
 		// };};
-
 		Login();
 
 		// *Random Questions
@@ -163,6 +264,16 @@ int main()
 	//std::string name;
 	//getline(std::cin, name);
 	//std::cout << name;
+
+	//std::fstream quizFiles;
+	//quizFiles.open("quizNames.txt", std::ios::in);//write
+	//std::cout << "`````````````````````````" << std::endl;
+	//std::string line;
+	//while (getline(quizFiles, line))
+	//{
+	//	std::cout << line << std::endl;
+	//}
+	//std::cout << "`````````````````````````" << std::endl;
 
 	return EXIT_SUCCESS;
 }
