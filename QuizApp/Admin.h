@@ -107,32 +107,41 @@ public:
 	static void AdminPage()
 	{
 		bool isRunning = true;
-		while (isRunning)
-		{
-			system("cls||clear");
+			int c = 0;
 			int choice = 0;
-			std::cout << "choose:"
-				<< "\n1. create quiz"
-				<< "\n2. start quiz"
-				<< "\n3. leader board"
-				<< "\n4. Back" << std::endl;
-
-			std::cin >> choice;
-			switch (choice)
+			while (isRunning)
 			{
-			case 1:
-				CreateQuiz();
-				break;
-			case 2:
-				Admin::StartQuiz();
-				break;
-			case 3:
-				Admin::LeaderBoard();
-				break;
-			case 4:
-				isRunning = false;
-				break;
-			}
+				system("cls||clear");
+				std::cout << "choose:"
+					<< "\n1. create quiz";
+				c == 0 ? std::cout << "<" : std::cout << "*";
+				std::cout << "\n2. start quiz";
+				c == 1 ? std::cout << "<" : std::cout << "*";
+				std::cout << "\n3. leader board";
+				c == 2 ? std::cout << "<" : std::cout << "*";
+				std::cout << "\n4. Back";
+				c == 3 ? std::cout << "<" : std::cout << "*";
+
+				Controller::Control(c, 3, choice);
+				switch (choice)
+				{
+				case 1:
+					CreateQuiz();
+					choice = 0;
+					break;
+				case 2:
+					Admin::StartQuiz();
+					choice = 0;
+					break;
+				case 3:
+					Admin::LeaderBoard();
+					choice = 0;
+					break;
+				case 4:
+					isRunning = false;
+					choice = 0;
+					break;
+				}
 		}
 	}
 };

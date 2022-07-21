@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Admin.h" />
     <ClInclude Include="Answers.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Question.h" />

@@ -26,7 +26,6 @@ protected:
 		}
 	}
 
-
 	static void StartQuiz()
 	{
 		srand(time(NULL));
@@ -145,8 +144,7 @@ protected:
 		leaderBoard.push_back(userJson);
 		leaderStream.open("./leaderboard/" + quizNames[choice - 1] + ".json", std::ios::out);
 		leaderStream << leaderBoard;
-		std::cin.get();
-		std::cin.ignore();
+		Sleep(2000);
 	}
 
 	static void LeaderBoard()
@@ -191,8 +189,8 @@ protected:
 			std::cout << "`````````````````````````" << std::endl;
 			leaderStream.close();
 		}
-		std::cin.get();
-		std::cin.ignore();
+		Sleep(2000);
+
 
 	}
 };
