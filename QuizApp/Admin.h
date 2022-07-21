@@ -83,12 +83,9 @@ private:
 				que->question = question;
 				que->answers.addAnswers(quizAnswers);
 				quizAnswers.clear();
-				//quizQuestions.push_back(que);
 				quiz.addQuestion(*que);
 				i++;
 				question.clear();
-				/*std::cout << "Question " << i << ": ";
-				getline(std::cin, question);*/
 				break;
 			}
 			default:
@@ -100,6 +97,9 @@ private:
 		quizFilesW.open("./txtFiles/quiznames.txt", std::ios::app);//write
 		quizFilesW << quiz.fileName << '\n';
 		quizFilesW.close();
+
+		quiz.reload();
+
 	}
 
 public:
