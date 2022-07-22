@@ -39,8 +39,10 @@ protected:
 		std::cout << "`````````````````````````" << std::endl;
 		std::string line;
 		std::vector<std::string> quizNames;
+		int i = 1;
 		while (getline(quizFilesR, line))
 		{
+			std::cout << i++ << '.';
 			std::cout << line << std::endl;
 			quizNames.push_back(line);
 		}

@@ -41,7 +41,8 @@ private:
 		quizQuestions.push_back(new Question);
 		std::vector<std::string> quizAnswers;
 		std::string question;
-		int choice;
+		int choice = 0;
+		int c = 0;
 		int i = 1;
 		int ka = 1;
 		std::string answer;
@@ -52,10 +53,14 @@ private:
 
 		while (isRunning)
 		{
-			std::cout << "1: new" << "\n2: back" << "\n3: save\n";
-			std::cout << "Choice: ";
-			std::cin >> choice;
-			std::cin.ignore();
+			system("cls||clear");
+			std::cout << "1: new";
+			c == 0 ? std::cout << "<" : std::cout << "*";
+			std::cout << "\n2: back";
+			c == 1 ? std::cout << "<" : std::cout << "*";
+			std::cout << "\n3: save";
+			c == 2 ? std::cout << "<" : std::cout << "*";
+			Controller::Control(c, 2, choice);
 			switch (choice)
 			{
 			case 1:
@@ -64,15 +69,17 @@ private:
 					ka != 1 ? (std::cout << "Answer " << ka++ << ": ") : (std::cout << "First Right Answer " << ka++ << ": ");
 					getline(std::cin, answer);
 					quizAnswers.push_back(answer);
+					choice = 0;
 					break;
 				}
 				std::cout << "Question" << i << ": ";
 				getline(std::cin, question);
+				choice = 0;
 				break;
 			case 2:
 			{
-
 				isRunning = false;
+				choice = 0;
 				break;
 			}
 			case 3:
@@ -86,10 +93,9 @@ private:
 				quiz.addQuestion(*que);
 				i++;
 				question.clear();
+				choice = 0;
 				break;
 			}
-			default:
-				break;
 			}
 		}
 		_mkdir("./txtFiles");
@@ -99,7 +105,6 @@ private:
 		quizFilesW.close();
 
 		quiz.reload();
-
 	}
 
 public:
@@ -107,41 +112,41 @@ public:
 	static void AdminPage()
 	{
 		bool isRunning = true;
-			int c = 0;
-			int choice = 0;
-			while (isRunning)
-			{
-				system("cls||clear");
-				std::cout << "choose:"
-					<< "\n1. create quiz";
-				c == 0 ? std::cout << "<" : std::cout << "*";
-				std::cout << "\n2. start quiz";
-				c == 1 ? std::cout << "<" : std::cout << "*";
-				std::cout << "\n3. leader board";
-				c == 2 ? std::cout << "<" : std::cout << "*";
-				std::cout << "\n4. Back";
-				c == 3 ? std::cout << "<" : std::cout << "*";
+		int c = 0;
+		int choice = 0;
+		while (isRunning)
+		{
+			system("cls||clear");
+			std::cout << "choose:"
+				<< "\n1. create quiz";
+			c == 0 ? std::cout << "<" : std::cout << "*";
+			std::cout << "\n2. start quiz";
+			c == 1 ? std::cout << "<" : std::cout << "*";
+			std::cout << "\n3. leader board";
+			c == 2 ? std::cout << "<" : std::cout << "*";
+			std::cout << "\n4. Back";
+			c == 3 ? std::cout << "<" : std::cout << "*";
 
-				Controller::Control(c, 3, choice);
-				switch (choice)
-				{
-				case 1:
-					CreateQuiz();
-					choice = 0;
-					break;
-				case 2:
-					Admin::StartQuiz();
-					choice = 0;
-					break;
-				case 3:
-					Admin::LeaderBoard();
-					choice = 0;
-					break;
-				case 4:
-					isRunning = false;
-					choice = 0;
-					break;
-				}
+			Controller::Control(c, 3, choice);
+			switch (choice)
+			{
+			case 1:
+				CreateQuiz();
+				choice = 0;
+				break;
+			case 2:
+				Admin::StartQuiz();
+				choice = 0;
+				break;
+			case 3:
+				Admin::LeaderBoard();
+				choice = 0;
+				break;
+			case 4:
+				isRunning = false;
+				choice = 0;
+				break;
+			}
 		}
 	}
 };
