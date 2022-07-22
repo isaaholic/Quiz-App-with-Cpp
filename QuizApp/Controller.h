@@ -6,7 +6,7 @@ public:
 
 	static void Control(int& c, int cMax, int& choice)
 	{
-		static int chc;
+		int chc;
 		switch (chc = _getch())
 		{
 		case KEY_UP:
